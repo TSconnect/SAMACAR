@@ -54,9 +54,15 @@ class Chauffeur
      */
     private $vehicules;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Notation::class, mappedBy="Chauffeur")
+     */
+    private $notations;
+
     public function __construct()
     {
         $this->vehicules = new ArrayCollection();
+        $this->notations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +166,36 @@ class Chauffeur
             // set the owning side to null (unless already changed)
             if ($vehicule->getChauffeur() === $this) {
                 $vehicule->setChauffeur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notation[]
+     */
+    public function getNotations(): Collection
+    {
+        return $this->notations;
+    }
+
+    public function addNotation(Notation $notation): self
+    {
+        if (!$this->notations->contains($notation)) {
+            $this->notations[] = $notation;
+            $notation->setChauffeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotation(Notation $notation): self
+    {
+        if ($this->notations->removeElement($notation)) {
+            // set the owning side to null (unless already changed)
+            if ($notation->getChauffeur() === $this) {
+                $notation->setChauffeur(null);
             }
         }
 
