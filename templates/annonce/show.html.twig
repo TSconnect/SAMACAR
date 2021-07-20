@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce{% endblock %}
+
+{% block body %}
+    <h1>Annonce</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ annonce.id }}</td>
+            </tr>
+            <tr>
+                <th>LieuDepart</th>
+                <td>{{ annonce.LieuDepart }}</td>
+            </tr>
+            <tr>
+                <th>LieuArrivee</th>
+                <td>{{ annonce.LieuArrivee }}</td>
+            </tr>
+            <tr>
+                <th>HeureDepart</th>
+                <td>{{ annonce.HeureDepart ? annonce.HeureDepart|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>PrixTrajet</th>
+                <td>{{ annonce.PrixTrajet }}</td>
+            </tr>
+            <tr>
+                <th>PlacesDisponibles</th>
+                <td>{{ annonce.PlacesDisponibles }}</td>
+            </tr>
+            <tr>
+                <th>Chauffeur</th>
+                <td>{{ annonce.Chauffeur }}</td>
+            </tr>
+            <tr>
+                <th>Vehicule</th>
+                <td>{{ annonce.Vehicule }}</td>
+            </tr>
+            <tr>
+                <th>DatePublication</th>
+                <td>{{ annonce.DatePublication ? annonce.DatePublication|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateExpiration</th>
+                <td>{{ annonce.DateExpiration ? annonce.DateExpiration|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EtatAnnonce</th>
+                <td>{{ annonce.EtatAnnonce }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('annonce_index') }}">back to list</a>
+
+    <a href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
+
+    {{ include('annonce/_delete_form.html.twig') }}
+{% endblock %}

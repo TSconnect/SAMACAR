@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trajet index{% endblock %}
+
+{% block body %}
+    <h1>Trajet index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>EtatTrajet</th>
+                <th>Debut</th>
+                <th>FinTrajet</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for trajet in trajets %}
+            <tr>
+                <td>{{ trajet.id }}</td>
+                <td>{{ trajet.EtatTrajet }}</td>
+                <td>{{ trajet.Debut ? trajet.Debut|date('H:i:s') : '' }}</td>
+                <td>{{ trajet.finTrajet ? trajet.finTrajet|date('H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('trajet_show', {'id': trajet.id}) }}">show</a>
+                    <a href="{{ path('trajet_edit', {'id': trajet.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('trajet_new') }}">Create new</a>
+{% endblock %}
